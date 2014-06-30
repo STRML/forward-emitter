@@ -3,6 +3,11 @@ Forward-emitter
 
 Forward events from one Node EventEmitter to another.
 
+Installation
+------------
+
+`npm install forward-emitter`
+
 Usage
 -----
 
@@ -25,3 +30,12 @@ forward(src, dest, function(eventName) {
 });
 
 ```
+
+How It Works
+------------
+
+`forward-emitter` listens to the `newListener` and `removeListener` events, introduced in Node `0.8` and
+Node `0.10` respectively. When a callback is bound to an event on the destination emitter, the listener
+is forwarded to the source emitter.
+
+For that reason, this module should not be used in Node `< 0.10` if you plan to use `removeListener`.

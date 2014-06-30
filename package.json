@@ -4,7 +4,7 @@
   "description": "Forward events from any Node EventEmitter to another EventEmitter.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/"
   },
   "repository": {
     "type": "git",
@@ -12,9 +12,13 @@
   },
   "keywords": [
     "eventemitter",
-    "forward",
-    "proxy"
+    "events",
+    "forward"
   ],
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
   "author": "Samuel Reed <sam@tixelated.com> (http://strml.net/)",
   "license": "MIT",
   "bugs": {
