@@ -27,6 +27,26 @@ describe('forward(src, dest)', function() {
     src.emit('test');
   });
 
+  it('should forward in a chain', function() {
+    var a = new EventEmitter();
+    var b = new EventEmitter();
+    var c = new EventEmitter();
+
+    forward(a, b);
+    forward(b, c);
+
+    var calls = 0;
+    a.on('test', increment);
+    b.on('test', increment);
+    c.on('test', increment);
+    function increment() {
+      calls++;
+    }
+
+    a.emit('test', 'event payload');
+    calls.should.equal(3);
+  });
+
   it('should forward errors', function(done){
     var src = new EventEmitter();
     var dest = new EventEmitter();
