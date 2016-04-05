@@ -59,6 +59,18 @@ describe('forward(src, dest)', function() {
 
     src.emit('error', new Error('test error'));
   });
+
+  it('should not loop forever', function(done) {
+    var src1 = new EventEmitter();
+    var src2 = new EventEmitter();
+    var src3 = new EventEmitter();
+    var dest = new EventEmitter();
+    forward(src1, dest);
+    forward(src2, dest);
+    forward(src3, dest);
+
+    done();
+  });
 });
 
 describe('forward(src, dest, filterFn)', function() {

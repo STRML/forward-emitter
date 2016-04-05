@@ -7,13 +7,17 @@ module.exports = function forwardEmitter(src, dest, filterFn) {
   }
 
   // Listeners bound to the destination emitter should be bound to the source emitter.
-  dest.on('newListener', function(eventName, listener) {
-    if (filterFn(eventName)) src.on(eventName, listener);
-  });
+  dest.on('newListener', newListener);
+
+  function newListener(eventName, listener) {
+    if (filterFn(eventName) && listener !== removeListener) src.on(eventName, listener);
+  }
 
   // When a listener is removed from the destination emitter, remove it from the source emitter
   // (otherwise it will continue to be called).
-  dest.on('removeListener', function(eventName, listener) {
+  dest.on('removeListener', removeListener);
+
+  function removeListener(eventName, listener) {
     src.removeListener(eventName, listener);
-  });
+  }
 };
