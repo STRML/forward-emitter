@@ -1,6 +1,6 @@
 {
   "name": "forward-emitter",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Forward events from any Node EventEmitter to another EventEmitter.",
   "main": "index.js",
   "scripts": {
