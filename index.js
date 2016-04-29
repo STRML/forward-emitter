@@ -1,29 +1,24 @@
 'use strict';
 
-var uuid = "7b589d15-ffae-4559-b3e4-9c913446711b"
-
 module.exports = function forwardEmitter(src, dest, filterFn) {
   // If no filter is passed, forward all events.
   if (typeof filterFn !== 'function') {
     filterFn = function() { return true; };
   }
 
-
-  function newListener(eventName, listener) {
-    if (filterFn(eventName) && listener._uuid !== uuid) src.on(eventName, listener);
+  function _7b589d15_ffae_4559_b3e4_9c913446711b_newListener(eventName, listener) {
+    if (filterFn(eventName) && listener.name.indexOf('_7b589d15_ffae_4559_b3e4_9c913446711b_') !== 0) src.on(eventName, listener);
   }
-  newListener._uuid = uuid;
 
-  function removeListener(eventName, listener) {
+  function _7b589d15_ffae_4559_b3e4_9c913446711b_removeListener(eventName, listener) {
     src.removeListener(eventName, listener);
   }
-  removeListener._uuid = uuid;
 
   // Listeners bound to the destination emitter should be bound to the source emitter.
-  dest.on('newListener', newListener);
+  dest.on('newListener', _7b589d15_ffae_4559_b3e4_9c913446711b_newListener);
 
   // When a listener is removed from the destination emitter, remove it from the source emitter
   // (otherwise it will continue to be called).
-  dest.on('removeListener', removeListener);
+  dest.on('removeListener', _7b589d15_ffae_4559_b3e4_9c913446711b_removeListener);
 
 };
